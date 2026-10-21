@@ -1,0 +1,12 @@
+name = "battleship-online"
+workers_dev = false
+
+[build]
+  port = 8080
+  durables = []
+
+[[routes]]
+  path = "/"
+
+[[planet]]
+  edge = true
