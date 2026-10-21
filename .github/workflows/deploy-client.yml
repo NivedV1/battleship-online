@@ -27,10 +27,10 @@ jobs:
           npm run build
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v2
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          pagesName: battleship-online
-          directory: packages/client/dist
-          projectName: battleship-online
+        run: |
+          cd packages/client/dist
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"path":"index.html","projectName":"battleship-online"}' \
+            "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CF_ACCOUNT_ID }}/pages/projects/battleship-online/deployments"
