@@ -1,12 +1,3 @@
 name = "battleship-online"
-workers_dev = false
-
-[build]
-  port = 8080
-  durables = []
-
-[[routes]]
-  path = "/"
-
-[[planet]]
-  edge = true
+pages_build_output_dir = "packages/client/dist"
+compatibility_date = "2026-10-21"
