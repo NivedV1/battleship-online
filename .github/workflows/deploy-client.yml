@@ -27,10 +27,8 @@ jobs:
           npm run build
 
       - name: Deploy to Cloudflare Pages
-        run: |
-          cd packages/client/dist
-          curl -X POST \
-            -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            --data '{"compatibility_date":"2026-10-21"}' \
-            "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CF_ACCOUNT_ID }}/pages/projects/battleship-online/deployments"
+        uses: Cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          command: pages deploy packages/client/dist --project-name=battleship-online
